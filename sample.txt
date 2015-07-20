@@ -1,0 +1,25 @@
+commit c6d19b9259b76e1ccd55695ac273856aed255e37
+Author: ufc06.portugal <jose.hernandes@lge.com>
+Date:   Thu Feb 7 19:34:44 2013 +0000
+
+    [XMPP_SERVER] Add compatibility for past client versions
+
+diff --git a/src/java/lge/great/xmpplib/communicationinterface/IQGameHandler.java b/src/java/lge/great/xmpplib/communicationinterface/IQGameHandler.java
+index 55a3454..0d3a816 100644
+--- a/src/java/lge/great/xmpplib/communicationinterface/IQGameHandler.java
++++ b/src/java/lge/great/xmpplib/communicationinterface/IQGameHandler.java
+@@ -57,9 +57,10 @@ public class IQGameHandler extends IQHandler implements ServerFeaturesProvider {
+                                        .attributeValue("numberofPlayers"));
+                        numberofMatches = Integer.valueOf(element
+                                        .attributeValue("numberofMatches"));
+-                       roomName = element.attributeValue("roomName").toString();
+-                       password = element.attributeValue("password").toString();
+-
++                       
++                       roomName = element.attributeValue("roomName","null").toString();
++                       password = element.attributeValue("password","null").toString();
++                       
+                        if (numberofPlayers == -1 && numberofMatches == -1) {
+                                if (roomName.equals("null")) {
+                                        proccessResult = mServer.processRequestAllRoomsIQ(
+

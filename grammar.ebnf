@@ -1,1 +1,19 @@
-S = COMMIT|Epsilon;COMMIT = COMMITHEADER WHITESPACE AUTHORHEADER DIFF; COMMITHEADER = 'commit' WHITESPACE HASH'; AUTHORHEADER = 'Author:' WHITESPACE NAME WHITESPACE EMAIL; NAME = #'[a-z0-9]+'; EMAIL =  '<' NAME '@' NAME '>';WHITESPACE = #'\\s+'HASH = #'[a-z0-9]{40}';DIFF = #'.*'
+S = COMMITHEADER <WHITESPACE> AUTHOR <WHITESPACE> DATE MESSAGE DIFF;
+
+COMMITHEADER = 'commit' <WHITESPACE> HASH;
+
+HASH = #'[a-z0-9]{40}';
+
+AUTHOR = 'Author:' <WHITESPACE> NAME <WHITESPACE> EMAIL; 
+
+EMAIL = #'(?s)<.+>'; 
+
+NAME = #'([a-z0-9]|\.)+';
+
+WHITESPACE =  #'(\s|\n)+';
+
+DATE = 'Date:' <WHITESPACE> #'.*\n';
+
+MESSAGE = #'(.|\n)*?(?=diff --git)';
+
+DIFF = #'(.|\n)*';

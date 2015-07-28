@@ -16,4 +16,14 @@ DATE = 'Date:' <WHITESPACE> #'.*\n';
 
 MESSAGE = #'(.|\n)*?(?=diff --git)';
 
-DIFF = #'(.|\n)*';
+DIFF = DIFFLINE INDEX MINUS PLUS AT #'(.|\n)*';
+
+DIFFLINE = #'diff --git.*\n'
+
+INDEX = #'index.*\n'
+
+MINUS = #'---.*\n'
+
+PLUS = #'\+\+\+.*\n'
+
+AT = #'@.*\n'
